@@ -17,3 +17,6 @@ README.txt
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 Assembly-CSharp.csproj
+/.vs
+SnakeVSBlocks.sln
+.vsconfig

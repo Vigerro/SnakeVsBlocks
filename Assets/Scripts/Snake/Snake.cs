@@ -17,13 +17,14 @@ public class Snake : MonoBehaviour
     private List<Segment> _tail;
 
     public event UnityAction<int> SizeUpdated;
-    private void Awake()
+    private void Start()
     {
         _tailGenerator = GetComponent<TailGenerator>();
         _input = GetComponent<SnakeInput>();
 
         _tail = _tailGenerator.Generate(_tailSize);
-        SizeUpdated?.Invoke(_tail.Count);
+
+        SizeUpdated?.Invoke(_tailSize);
     }
 
     private void FixedUpdate()
@@ -60,6 +61,11 @@ public class Snake : MonoBehaviour
     
     private void OnBlockCollided()
     {
+        if(_tail.Count <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Segment deletedSegment = _tail[_tail.Count - 1];
         _tail.Remove(deletedSegment);
         Destroy(deletedSegment.gameObject);
