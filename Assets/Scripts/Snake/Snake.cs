@@ -24,7 +24,7 @@ public class Snake : MonoBehaviour
 
         _tail = _tailGenerator.Generate(_tailSize);
 
-        SizeUpdated?.Invoke(_tailSize);
+        SizeUpdated?.Invoke(_tail.Count + 1);
     }
 
     private void FixedUpdate()
@@ -69,12 +69,12 @@ public class Snake : MonoBehaviour
         Segment deletedSegment = _tail[_tail.Count - 1];
         _tail.Remove(deletedSegment);
         Destroy(deletedSegment.gameObject);
-        SizeUpdated?.Invoke(_tail.Count);
+        SizeUpdated?.Invoke(_tail.Count + 1);
     }
 
     private void OnBonusCollected(int bonusSize)
     {
         _tail.AddRange(_tailGenerator.Generate(bonusSize));
-        SizeUpdated?.Invoke(_tail.Count);
+        SizeUpdated?.Invoke(_tail.Count + 1);
     }
 }
